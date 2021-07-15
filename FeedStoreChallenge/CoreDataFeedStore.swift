@@ -52,13 +52,21 @@ public final class CoreDataFeedStore: FeedStore {
 				try context.save()
 				completion(nil)
 			} catch {
+				context.reset()
 				completion(error)
 			}
 		}
 	}
 
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
-		fatalError("Must be implemented")
+		perform { context in
+			do {
+				try ManagedCache.find(in: context).map(context.delete).map(context.save)
+				completion(nil)
+			} catch {
+				completion(error)
+			}
+		}
 	}
 
 	private func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
