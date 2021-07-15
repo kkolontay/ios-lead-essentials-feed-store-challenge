@@ -11,8 +11,8 @@ import Foundation
 import CoreData
 
 @objc(ManagedCache)
-public class ManagedCache: NSManagedObject {
-	static var typeName: String {
+final class ManagedCache: NSManagedObject {
+	private static var typeName: String {
 		return String(describing: self)
 	}
 
