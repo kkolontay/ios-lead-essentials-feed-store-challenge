@@ -10,9 +10,9 @@
 import Foundation
 import CoreData
 
-
 @objc(ManagedCache)
 final class ManagedCache: NSManagedObject {
+	
 	private static var typeName: String {
 		return String(describing: self)
 	}
